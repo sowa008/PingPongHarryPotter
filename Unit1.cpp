@@ -91,6 +91,7 @@ void __fastcall TForm1::timerBallTimer(TObject *Sender)
    Label2->Caption = IntToStr(pointsOfLeftPlayer) + " : " + IntToStr(pointsOfRightPlayer);
    Button1->Visible=true;
    Button2->Visible=true;
+   Button3->Visible=true;
    gameON=false;
    }
    else
@@ -119,6 +120,7 @@ void __fastcall TForm1::timerBallTimer(TObject *Sender)
    Label2->Caption = IntToStr(pointsOfLeftPlayer) + " : " + IntToStr(pointsOfRightPlayer);
    Button1->Visible=true;
    Button2->Visible=true;
+   Button3->Visible=true;
    gameON=false;
    }
    else
@@ -204,6 +206,7 @@ ballPictureName = "img/leftSnitch.bmp";
 
 Button1->Visible=false;
 Button2->Visible=false;
+Button3->Visible=false;
 
 pointsOfLeftPlayer = 0;
 pointsOfRightPlayer = 0;
@@ -228,6 +231,7 @@ gameON = false;
 timerBall -> Enabled=true;
 Form1->Label1Click(Sender);
 }
+
 //---------------------------------------------------------------------------
 
 
@@ -235,6 +239,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 {
 Button1->Visible=false;
 Button2->Visible=false;
+Button3->Visible=false;
 
 Form1->ball -> Picture -> LoadFromFile("img/leftSnitch.bmp");
 ballPictureName = "img/leftSnitch.bmp";
@@ -326,4 +331,28 @@ if (gameON == true) {
 
 
 
+
+
+
+void __fastcall TForm1::FormClose(TObject *Sender, TCloseAction &Action)
+{
+   if (Application -> MessageBox(
+   "Are you sure to quit game?", "Quit", MB_YESNO | MB_ICONQUESTION) == IDYES)
+   {
+   Application -> Terminate();
+   }
+   else Action = caNone;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button3Click(TObject *Sender)
+{
+   if (Application -> MessageBox(
+   "Are you sure to quit game?", "Quit", MB_YESNO | MB_ICONQUESTION) == IDNO)
+   {
+   Action = caNone;
+   }
+   else  Application -> Terminate();
+}
+//---------------------------------------------------------------------------
 

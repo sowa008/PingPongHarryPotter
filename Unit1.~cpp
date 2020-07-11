@@ -7,6 +7,7 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
+
 TForm1 *Form1;
 
 bool gameON = false;
@@ -48,9 +49,6 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 }
 //---------------------------------------------------------------------------
 
-
-
-
 void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
       TShiftState Shift)
 {
@@ -74,9 +72,6 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 //---------------------------------------------------------------------------
 
 
-
-
-
 void __fastcall TForm1::timerBallTimer(TObject *Sender)
 {
    if (gameON == true) {
@@ -96,6 +91,7 @@ void __fastcall TForm1::timerBallTimer(TObject *Sender)
    Label2->Caption = IntToStr(pointsOfLeftPlayer) + " : " + IntToStr(pointsOfRightPlayer);
    Button1->Visible=true;
    Button2->Visible=true;
+   Button3->Visible=true;
    gameON=false;
    }
    else
@@ -124,6 +120,7 @@ void __fastcall TForm1::timerBallTimer(TObject *Sender)
    Label2->Caption = IntToStr(pointsOfLeftPlayer) + " : " + IntToStr(pointsOfRightPlayer);
    Button1->Visible=true;
    Button2->Visible=true;
+   Button3->Visible=true;
    gameON=false;
    }
    else
@@ -169,19 +166,15 @@ void __fastcall TForm1::downTimer(TObject *Sender)
 
 void __fastcall TForm1::uprightTimer(TObject *Sender)
 {
-   if (rightBroom -> Top > 1) rightBroom -> Top -=10;        
+   if (rightBroom -> Top > 1) rightBroom -> Top -=10;
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::downrightTimer(TObject *Sender)
 {
-   if (rightBroom -> Top + rightBroom -> Height < background->Height -10) rightBroom -> Top +=10;        
+   if (rightBroom -> Top + rightBroom -> Height < background->Height -10) rightBroom -> Top +=10;
 }
 //---------------------------------------------------------------------------
-
-
-
-
 
 
 void __fastcall TForm1::Label1Click(TObject *Sender)
@@ -237,6 +230,7 @@ gameON = false;
 timerBall -> Enabled=true;
 Form1->Label1Click(Sender);
 }
+
 //---------------------------------------------------------------------------
 
 
@@ -244,6 +238,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 {
 Button1->Visible=false;
 Button2->Visible=false;
+Button3->Visible=false;
 
 Form1->ball -> Picture -> LoadFromFile("img/leftSnitch.bmp");
 ballPictureName = "img/leftSnitch.bmp";
@@ -256,7 +251,6 @@ ball -> Top=8;
 ball -> Visible=true;
 bludger1 -> Visible=true;
 bludger2 -> Visible=true;
-//odliczanie
 gameON = false;
 timerBall -> Enabled=true;
 Form1->Label1Click(Sender);
@@ -334,32 +328,30 @@ if (gameON == true) {
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm1::resetClick(TObject *Sender)
+
+
+
+
+
+void __fastcall TForm1::FormClose(TObject *Sender, TCloseAction &Action)
 {
- gameON = false;
-
-ball -> Left=550;
-ball -> Top=8;
-ball -> Visible=true;
-
-bludger1 -> Left=440;
-bludger1 -> Top=15;
-bludger1 -> Visible=true;
-
-bludger2 -> Left=660;
-bludger2 -> Top=15;
-bludger2 -> Visible=true;
-
-//timerBall -> Enabled=true;
-
-//gameON == true;
-
-//Form1->OnKeyDown(Sender);
-//Form1->OnKeyUp(Sender);
-//Form1->timerBallTimer(Sender);
-Label1Click(Sender);
+   if (Application -> MessageBox(
+   "Are you sure to quit game?", "Quit", MB_YESNO | MB_ICONQUESTION) == IDYES)
+   {
+   Application -> Terminate();
+   }
+   else Action = caNone;
 }
 //---------------------------------------------------------------------------
 
-
+void __fastcall TForm1::Button3Click(TObject *Sender)
+{
+   if (Application -> MessageBox(
+   "Are you sure to quit game?", "Quit", MB_YESNO | MB_ICONQUESTION) == IDNO)
+   {
+   Action = caNone;
+   }
+   else  Application -> Terminate();
+}
+//---------------------------------------------------------------------------
 

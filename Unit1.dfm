@@ -13,6 +13,7 @@ object Form1: TForm1
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose
   OnKeyDown = FormKeyDown
   OnKeyUp = FormKeyUp
   PixelsPerInch = 96
@@ -7457,6 +7458,22 @@ object Form1: TForm1
     TabOrder = 1
     Visible = False
     OnClick = Button2Click
+  end
+  object Button3: TButton
+    Left = 464
+    Top = 424
+    Width = 225
+    Height = 65
+    Caption = 'QUIT'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -20
+    Font.Name = 'Baskerville Old Face'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+    Visible = False
+    OnClick = Button3Click
   end
   object timerBall: TTimer
     Interval = 30
